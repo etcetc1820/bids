@@ -5,13 +5,12 @@ import Button from "../../../shared/Button/Button";
 import BidItem from "./Components/BidItem";
 import * as acts from "../bidsForm.actions";
 import { getBids, getError, getId } from "../bidsForm.selectors";
-import { Bid } from "../bidsForm.state";
 import { AppState } from "../../../store/state";
 import "./bidsForm.scss";
 
 const BidsForm: React.FunctionComponent = () => {
   const dispatch = useDispatch();
-  const bids: Bid[] = useSelector((state: AppState) => getBids(state));
+  const bids = useSelector((state: AppState) => getBids(state));
   const error = useSelector((state: AppState) => getError(state));
   const id = useSelector((state: AppState) => getId(state));
   const [amount, setAmount] = useState(0);
@@ -35,6 +34,7 @@ const BidsForm: React.FunctionComponent = () => {
           id,
           amount: +amount,
           fullName: "You",
+          createAt: new Date(),
         })
       );
     }
@@ -59,11 +59,12 @@ const BidsForm: React.FunctionComponent = () => {
           <h3>Existing bids:</h3>
           {bids.length > 0 ? (
             <ul>
-              {bids?.map((bid) => (
+              {bids.map((bid) => (
                 <BidItem
                   key={bid.id}
                   fullName={bid.fullName}
                   amount={bid.amount}
+                  date={bid.createAt}
                 />
               ))}
             </ul>
@@ -95,6 +96,20 @@ const BidsForm: React.FunctionComponent = () => {
               Remove bid
             </Button>
           ) : null}
+          <Button
+            onClick={(): void => {
+              dispatch(new acts.SortBy("createAt"));
+            }}
+          >
+            Sort by Date
+          </Button>
+          <Button
+            onClick={(): void => {
+              dispatch(new acts.SortBy("amount"));
+            }}
+          >
+            Sort by Price
+          </Button>
         </>
       )}
     </div>

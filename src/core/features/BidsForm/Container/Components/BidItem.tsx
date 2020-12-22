@@ -4,15 +4,17 @@ import "./bidItem.scss";
 interface BidItemInterface {
   fullName: string;
   amount: number;
+  date: Date;
 }
 
 const BidItem: React.FunctionComponent<BidItemInterface> = ({
   fullName,
   amount,
+  date,
 }) => {
   return (
     <li>
-      {fullName} ${amount}
+      {fullName} ${amount} {date.toISOString()}
     </li>
   );
 };

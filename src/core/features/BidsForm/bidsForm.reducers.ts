@@ -1,3 +1,4 @@
+import lodash from "lodash";
 import { BidsFormState } from "./bidsForm.state";
 import * as acts from "./bidsForm.actions";
 
@@ -5,6 +6,7 @@ const initialState: BidsFormState = {
   bids: [],
   error: "",
   id: null,
+  sort: "createAt",
 };
 
 const reducer = (
@@ -32,6 +34,8 @@ const reducer = (
       } else {
         bids[foundIndex].amount = action.payload.amount;
       }
+      console.log(state.sort);
+      bids = lodash.sortBy(bids, [state.sort]);
 
       return {
         ...state,
@@ -51,6 +55,16 @@ const reducer = (
       return {
         ...state,
         bids: [...updatedBids],
+      };
+    case acts.BidsFormActions.SORT_BIDS:
+      let sortedBids = [...state.bids];
+
+      sortedBids = lodash.sortBy(sortedBids, [action.payload]);
+
+      return {
+        ...state,
+        sort: action.payload,
+        bids: sortedBids,
       };
     default:
       return state;

@@ -7,6 +7,7 @@ export enum BidsFormActions {
   CREATE_OR_UPDATE_BIDS_ERROR = "[BidsForm] create or update bids error",
   SET_ID = "[BidsForm] update id",
   REMOVE_BID = "[BidsFOrm] remove bid",
+  SORT_BIDS = "[Bid] sort",
 }
 
 export class GetBids extends Action {
@@ -41,9 +42,18 @@ export class RemoveBid extends Action {
   readonly type = BidsFormActions.REMOVE_BID;
 }
 
+export class SortBy extends Action {
+  readonly type = BidsFormActions.SORT_BIDS;
+
+  constructor(public payload: "amount" | "createAt") {
+    super();
+  }
+}
+
 export type BidsFormActionsTypes =
   | GetBids
   | UpdateBids
   | UpdateError
   | SetId
-  | RemoveBid;
+  | RemoveBid
+  | SortBy;

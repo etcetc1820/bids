@@ -58,7 +58,8 @@
         "semi": "error",
         "no-console": "off",
         "spaced-comment": "off",
-        "no-case-declarations": "off"
+        "no-case-declarations": "off",
+        "no-unused-vars": "off"
     },
     "overrides": []
 }

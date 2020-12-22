@@ -11,10 +11,16 @@ function* getBidsRequest(): SagaIterator {
     const res = yield call(getBids.GetBids);
     let bids = res?.data?.data?.bids?.data;
     bids = bids?.map(
-      (bid: { driver: { full_name: string }; id: number; amount: number }) => ({
+      (bid: {
+        driver: { full_name: string };
+        id: number;
+        amount: number;
+        created_at: string;
+      }) => ({
         id: bid.id,
         amount: bid.amount,
         fullName: bid.driver.full_name,
+        createAt: new Date(bid.created_at),
       })
     );
 

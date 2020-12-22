@@ -1,7 +1,13 @@
-export type Bid = { id: number; amount: number; fullName: string };
+export type Bid = {
+  id: number;
+  amount: number;
+  fullName: string;
+  createAt: Date;
+};
 
 export interface BidsFormState {
-  bids: Bid[] | [];
+  bids: Bid[];
   error: string;
   id: null | number;
+  sort: "createAt" | "amount";
 }
