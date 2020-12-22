@@ -5,9 +5,11 @@ export type Bid = {
   createAt: Date;
 };
 
+export type Sort = "createAt" | "amount";
+
 export interface BidsFormState {
   bids: Bid[];
   error: string;
   id: null | number;
-  sort: "createAt" | "amount";
+  sort: Sort;
 }

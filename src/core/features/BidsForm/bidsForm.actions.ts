@@ -1,5 +1,5 @@
 import { Action } from "../../store/state";
-import { Bid } from "./bidsForm.state";
+import { Bid, Sort } from "./bidsForm.state";
 
 export enum BidsFormActions {
   GET_BIDS = "[BidsForm] get bids",
@@ -45,7 +45,7 @@ export class RemoveBid extends Action {
 export class SortBy extends Action {
   readonly type = BidsFormActions.SORT_BIDS;
 
-  constructor(public payload: "amount" | "createAt") {
+  constructor(public payload: Sort) {
     super();
   }
 }
